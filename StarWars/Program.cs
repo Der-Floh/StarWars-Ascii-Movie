@@ -10,11 +10,11 @@ public sealed class Program
 
     static void Main(string[] args)
     {
-        var speedMultiplier = 1;
+        var speedMultiplier = 1.0;
         if (args is not null && args.Length != 0)
         {
             var speedString = args[0].Replace("-", "");
-            if (int.TryParse(speedString, out var speed))
+            if (double.TryParse(speedString, out var speed))
                 speedMultiplier = speed;
         }
 
@@ -28,7 +28,7 @@ public sealed class Program
         Console.ReadKey();
     }
 
-    static void LoadScreens(string[] lines, int speedMultiplier)
+    static void LoadScreens(string[] lines, double speedMultiplier)
     {
         var printThread = new Thread(new ThreadStart(PrintScreens));
         printThread.Start();
@@ -48,7 +48,7 @@ public sealed class Program
             sb.AppendLine(line);
             if (index == 13)
             {
-                lineQueue.Enqueue(new Screen { Text = sb.ToString(), Duration = timeDuration * 100 / speedMultiplier });
+                lineQueue.Enqueue(new Screen { Text = sb.ToString(), Duration = (int)(timeDuration * 70.0 / speedMultiplier) });
                 if (lineQueue.Count >= 50)
                 {
                     queueNotifier.Set();
