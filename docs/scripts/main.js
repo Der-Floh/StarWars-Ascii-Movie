@@ -47,8 +47,8 @@ function loadScreens(lines) {
 
     let newLine = line.replaceAll('\n', '').replaceAll('\r', '');
     if (!newLine || newLine.length === 0)
-      newLine = ' ';
-    newLine = newLine.replaceAll(' ', '⠀');
+      newLine = '⠀';
+    // newLine = newLine.replaceAll(' ', '⠀');
     sb.push(newLine);
 
     if (index === 13) {
