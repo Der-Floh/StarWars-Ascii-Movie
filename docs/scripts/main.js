@@ -45,7 +45,11 @@ function loadScreens(lines) {
       return;
     }
 
-    sb.push(line.replaceAll('\n', '').replaceAll('\r', ''));
+    let newLine = line.replaceAll('\n', '').replaceAll('\r', '');
+    if (!newLine || newLine.length === 0)
+      newLine = ' ';
+    newLine = newLine.replaceAll(' ', '⠀');
+    sb.push(newLine);
 
     if (index === 13) {
       const screen = new Screen();
@@ -82,9 +86,6 @@ function printScreen(screen) {
 
   let screensInnerHTML = '';
   for (let line of screen.lines) {
-    if (!line || line.length === 0)
-      line = ' ';
-    line = line.replaceAll(' ', '⠀');
     screensInnerHTML += `<p class="line">${line}</p>`;
   }
   screensInnerHTML += '<p id="size-line" class="line">                                                                   </p>';
