@@ -1,16 +1,30 @@
 class Screen {
-  constructor(text = '', duration = 0) {
-    this.text = text;
-    this.duration = duration;
+  constructor() {
+    this.duration;
+    this.lines = [];
+  }
+
+  get text() {
+    return this.lines.join('\n');
+  }
+  set text(value) {
+    this.lines = [];
+    for (const line of value.split('\n')) {
+      this.lines.push(line);
+    }
   }
 }
 
 const lineQueue = [];
 let isRunning = false;
-let screenElem = document.getElementById('screen');
+let screenElem;
+
+window.addEventListener('load', () => {
+  screenElem = document.getElementById('screen');
+  main();
+});
 
 async function main() {
-  // Assuming Data.StarWars is a string with your text data
   const data = await getData();
   const lines = data.split('\n');
   if (!lines || lines.length === 0) return;
@@ -32,8 +46,12 @@ function loadScreens(lines) {
     }
 
     sb.push(line);
+
     if (index === 13) {
-      lineQueue.push(new Screen(sb.join('\n'), timeDuration * 70));
+      const screen = new Screen();
+      screen.duration = timeDuration * 70;
+      screen.lines = sb;
+      lineQueue.push(screen);
       sb = [];
       index = 0;
     } else {
@@ -59,10 +77,17 @@ async function printScreens() {
 }
 
 function printScreen(screen) {
-  if (!screen) return Promise.resolve();
-  if (!screenElem)
-    screenElem = document.getElementById('screen');
-  screenElem.textContent = screen.text;
+  if (!screen)
+    return Promise.resolve();
+
+  let screensInnerHTML = '';
+  for (const line of screen.lines) {
+    screensInnerHTML += `<p class="line">${line}</p>`;
+  }
+  screensInnerHTML += '<p id="size-line" class="line">                                                                   </p>';
+
+  screenElem.innerHTML = screensInnerHTML;
+
   return new Promise(resolve => setTimeout(resolve, screen.duration));
 }
 
@@ -75,7 +100,3 @@ async function getData() {
     console.error('There has been a problem with your fetch operation:', error);
   }
 }
-
-
-// Example usage
-main();
