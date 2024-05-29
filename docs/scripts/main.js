@@ -45,7 +45,7 @@ function loadScreens(lines) {
       return;
     }
 
-    sb.push(line);
+    sb.push(line.replaceAll('\n', '').replaceAll('\r', ''));
 
     if (index === 13) {
       const screen = new Screen();
@@ -84,7 +84,7 @@ function printScreen(screen) {
   for (let line of screen.lines) {
     if (!line || line.length === 0)
       line = ' ';
-    line = line.replace(' ', '-');
+    line = line.replaceAll(' ', '⠀');
     screensInnerHTML += `<p class="line">${line}</p>`;
   }
   screensInnerHTML += '<p id="size-line" class="line">                                                                   </p>';
