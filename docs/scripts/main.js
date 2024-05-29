@@ -82,6 +82,8 @@ function printScreen(screen) {
 
   let screensInnerHTML = '';
   for (const line of screen.lines) {
+    if (!line || line.length === 0)
+      line = ' ';
     screensInnerHTML += `<p class="line">${line}</p>`;
   }
   screensInnerHTML += '<p id="size-line" class="line">                                                                   </p>';
