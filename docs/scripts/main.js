@@ -81,9 +81,10 @@ function printScreen(screen) {
     return Promise.resolve();
 
   let screensInnerHTML = '';
-  for (const line of screen.lines) {
+  for (let line of screen.lines) {
     if (!line || line.length === 0)
       line = ' ';
+    line = line.replace(' ', '⠀');
     screensInnerHTML += `<p class="line">${line}</p>`;
   }
   screensInnerHTML += '<p id="size-line" class="line">                                                                   </p>';
