@@ -88,7 +88,7 @@ function printScreen(screen) {
   for (let line of screen.lines) {
     screensInnerHTML += `<p class="line">${line}</p>`;
   }
-  screensInnerHTML += '<p id="size-line" class="line">                                                                   </p>';
+  screensInnerHTML += '<p id="size-line" class="line">⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</p>';
 
   screenElem.innerHTML = screensInnerHTML;
 
