@@ -84,7 +84,7 @@ function printScreen(screen) {
   for (let line of screen.lines) {
     if (!line || line.length === 0)
       line = ' ';
-    line = line.replace(' ', '⠀');
+    line = line.replace(' ', '-');
     screensInnerHTML += `<p class="line">${line}</p>`;
   }
   screensInnerHTML += '<p id="size-line" class="line">                                                                   </p>';
